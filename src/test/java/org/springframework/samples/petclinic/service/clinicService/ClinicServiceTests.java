@@ -21,7 +21,9 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
@@ -30,7 +32,9 @@ import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.util.EntityUtils;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -40,7 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
  * TestContext Framework: </p> <ul> <li><strong>Spring IoC container caching</strong> which spares us unnecessary set up
  * time between test execution.</li> <li><strong>Dependency Injection</strong> of test fixture instances, meaning that
  * we don't need to perform application context lookups. See the use of {@link Autowired @Autowired} on the <code>{@link
- * AbstractClinicServiceTests#clinicService clinicService}</code> instance variable, which uses autowiring <em>by
+ * ClinicServiceTests#clinicService clinicService}</code> instance variable, which uses autowiring <em>by
  * type</em>. <li><strong>Transaction management</strong>, meaning each test method is executed in its own transaction,
  * which is automatically rolled back by default. Thus, even if tests insert or otherwise change database state, there
  * is no need for a teardown or cleanup script. <li> An {@link org.springframework.context.ApplicationContext
@@ -53,7 +57,10 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Michael Isvy
  * @author Vitaliy Fedoriv
  */
-public abstract class AbstractClinicServiceTests {
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles({"jpa", "hsqldb"})
+public class ClinicServiceTests {
 
     @Autowired
     protected ClinicService clinicService;

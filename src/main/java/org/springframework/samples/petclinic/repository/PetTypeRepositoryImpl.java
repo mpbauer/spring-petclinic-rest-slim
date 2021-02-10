@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-package org.springframework.samples.petclinic.repository.jpa;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+package org.springframework.samples.petclinic.repository;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Visit;
-import org.springframework.samples.petclinic.repository.PetTypeRepository;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Vitaliy Fedoriv
@@ -38,8 +35,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Profile("jpa")
-public class JpaPetTypeRepositoryImpl implements PetTypeRepository {
-	
+public class PetTypeRepositoryImpl implements PetTypeRepository {
+
     @PersistenceContext
     private EntityManager em;
 
@@ -69,7 +66,7 @@ public class JpaPetTypeRepositoryImpl implements PetTypeRepository {
 	public void delete(PetType petType) throws DataAccessException {
 		this.em.remove(this.em.contains(petType) ? petType : this.em.merge(petType));
 		Integer petTypeId = petType.getId();
-		
+
 		List<Pet> pets = this.em.createQuery("SELECT pet FROM Pet pet WHERE type_id=" + petTypeId).getResultList();
 		for (Pet pet : pets){
 			List<Visit> visits = pet.getVisits();

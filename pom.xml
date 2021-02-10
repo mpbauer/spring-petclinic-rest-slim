@@ -7,7 +7,7 @@
     <artifactId>spring-petclinic-rest</artifactId>
     <version>2.4.2</version>
 
-    <description>REST version of the Spring Petclinic sample application</description>
+    <description>Slimmed down REST version of the Spring Petclinic sample application</description>
     <url>https://spring-petclinic.github.io/</url>
 
     <parent>
@@ -18,12 +18,9 @@
     </parent>
 
     <properties>
-        <spring-data-jdbc.version>1.2.1.RELEASE</spring-data-jdbc.version>
+        <java.version>11</java.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
-        <jacoco.version>0.8.5</jacoco.version>
-
-        <docker.jib-maven-plugin.version>1.3.0</docker.jib-maven-plugin.version>
-        <docker.image.prefix>springcommunity</docker.image.prefix>
+        <jacoco.version>0.8.6</jacoco.version>
     </properties>
 
     <!-- repository for springfox plugin -->
@@ -38,20 +35,16 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -70,28 +63,10 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jdbc-core</artifactId>
-            <version>${spring-data-jdbc.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -149,7 +124,7 @@
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
+            <version>2.3.1</version>
         </dependency>
     </dependencies>
 
@@ -200,12 +175,12 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.87</minimum>
+                                            <minimum>0.83</minimum>
                                         </limit>
                                         <limit>
                                             <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.74</minimum>
+                                            <minimum>0.72</minimum>
                                         </limit>
                                     </limits>
                                     <excludes>
@@ -224,22 +199,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${docker.jib-maven-plugin.version}</version>
-                <configuration>
-                    <to>
-                        <image>docker.io/${docker.image.prefix}/${project.artifactId}</image>
-                        <tags>
-                            <tag>${project.version}</tag>
-                            <tag>latest</tag>
-                        </tags>
-                    </to>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-
 </project>

@@ -6,12 +6,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-public abstract class AbstractUserServiceTests {
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles({"jpa", "hsqldb"})
+public class UserServiceTests {
 
     @Autowired
     private UserService userService;
