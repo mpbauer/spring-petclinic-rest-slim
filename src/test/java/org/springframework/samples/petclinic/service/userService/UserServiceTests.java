@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-@ActiveProfiles({"jpa", "hsqldb"})
+@ActiveProfiles({"jpa", "h2"})
 class UserServiceTests {
 
     @Autowired
