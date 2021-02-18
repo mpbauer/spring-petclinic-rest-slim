@@ -60,6 +60,7 @@ You can then access petclinic here: [http://localhost:8080/petclinic/](http://lo
 [Spring Native](https://github.com/spring-projects-experimental/spring-native) provides support to compile Spring application to a native executable by utilizing [GraalVM](https://www.graalvm.org/).
 
 :construction: Warning: This section is under heavy construction
+
 > At the time of writing the [spring-native](https://github.com/spring-projects-experimental/spring-native) 
 > project is still in alpha and the number of supported dependencies is still relatively small.
 > A native configuration will be implemented once the `spring-native` project is more stable and supports a wider range of dependencies.
@@ -124,6 +125,7 @@ docker run --name petclinic -p 5432:5432 -e POSTGRES_PASSWORD=pass -d postgres
 In its default configuration, Petclinic doesn't have authentication and authorization enabled
 
 :construction: Warning: This section is under heavy construction
+
 > At the moment JWT based authentication is not implemented yet
 
 ### Enable Authentication
