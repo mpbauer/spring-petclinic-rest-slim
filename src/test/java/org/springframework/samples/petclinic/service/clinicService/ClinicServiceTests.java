@@ -54,7 +54,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-@ActiveProfiles({"jpa", "h2"})
+@ActiveProfiles({"h2"})
 class ClinicServiceTests {
 
     @Autowired

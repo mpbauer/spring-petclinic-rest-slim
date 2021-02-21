@@ -31,7 +31,6 @@ import java.util.Collection;
  */
 
 @Repository
-@Profile("jpa")
 public class SpecialtyRepositoryImpl implements SpecialtyRepository {
 
     @PersistenceContext

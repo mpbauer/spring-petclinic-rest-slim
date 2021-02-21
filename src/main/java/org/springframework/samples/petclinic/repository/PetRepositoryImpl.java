@@ -36,7 +36,6 @@ import java.util.List;
  * @author Vitaliy Fedoriv
  */
 @Repository
-@Profile("jpa")
 public class PetRepositoryImpl implements PetRepository {
 
     @PersistenceContext

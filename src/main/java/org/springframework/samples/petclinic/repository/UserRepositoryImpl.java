@@ -10,7 +10,6 @@ import org.springframework.samples.petclinic.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Profile("jpa")
 public class UserRepositoryImpl implements UserRepository {
 
     @PersistenceContext

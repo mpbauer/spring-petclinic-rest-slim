@@ -34,7 +34,6 @@ import java.util.Collection;
  * @author Vitaliy Fedoriv
  */
 @Repository
-@Profile("jpa")
 public class VetRepositoryImpl implements VetRepository {
 
     @PersistenceContext

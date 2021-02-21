@@ -38,7 +38,6 @@ import java.util.List;
  * @author Vitaliy Fedoriv
  */
 @Repository
-@Profile("jpa")
 public class VisitRepositoryImpl implements VisitRepository {
 
     @PersistenceContext

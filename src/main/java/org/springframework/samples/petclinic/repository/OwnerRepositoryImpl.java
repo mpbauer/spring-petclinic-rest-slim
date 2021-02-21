@@ -36,7 +36,6 @@ import java.util.Collection;
  * @author Vitaliy Fedoriv
  */
 @Repository
-@Profile("jpa")
 public class OwnerRepositoryImpl implements OwnerRepository {
 
     @PersistenceContext
