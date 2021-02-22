@@ -1,0 +1,35 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: spring-petclinic-rest-slim
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/PROJECT_ID/IMAGE:TAG
+          env:
+            - name: "DB_HOST"
+              valueFrom:
+                secretKeyRef:
+                  name: spring-petclinic-rest-slim-credentials
+                  key: db-host
+            - name: "DB_PORT"
+              valueFrom:
+                secretKeyRef:
+                  name: spring-petclinic-rest-slim-credentials
+                  key: db-port
+            - name: "DB_DATABASE"
+              valueFrom:
+                secretKeyRef:
+                  name: spring-petclinic-rest-slim-credentials
+                  key: db-database
+            - name: "DB_USERNAME"
+              valueFrom:
+                secretKeyRef:
+                  name: spring-petclinic-rest-slim-credentials
+                  key: db-username
+            - name: "DB_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: spring-petclinic-rest-slim-credentials
+                  key: db-password
