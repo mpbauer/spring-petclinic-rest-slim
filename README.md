@@ -122,9 +122,8 @@ docker run --name petclinic -p 5432:5432 -e POSTGRES_PASSWORD=pass -d postgres
 
 ## Security configuration
 
-In its default configuration, Petclinic doesn't have authentication and authorization enabled
-
-:construction: Warning: This section is under heavy construction
+A Role Based Access Control is enabled by default when running the application with the `default` profile. When you start the
+application with the `local` profile through `./mvnw spring-boot:run -Dspring-boot.run.profiles=local` authentication is disabled by default.
 
 > At the moment JWT based authentication is not implemented yet
 
@@ -148,3 +147,41 @@ OWNER_ADMIN  | OwnerController<br/>PetController<br/>PetTypeController (`getAllP
 VET_ADMIN    | PetTypeController<br/>SpecialityController</br>VetController
 ADMIN        | UserController
 
+### Roles Based Access Control with predefined JSON Web Tokens
+
+To make the use of this sample application as easy as possible a set of fixed JSON Web Tokens with different roles were
+generated and signed with a secret that is hardcoded in `application.properties`. You can copy the pre-created tokens and
+pass it via the `Authorization` header to the application.
+
+**Example:**
+```shell
+curl --location --request GET 'http://localhost:8080/petclinic/api/owners' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJYMDAwMDQiLCJpc3MiOiJodHRwczovL3NwcmluZy1wZXRjbGluaWMuZ2l0aHViLmlvL2lzc3VlciIsImdyb3VwcyI6WyJST0xFX09XTkVSX0FETUlOIiwiUk9MRV9WRVRfQURNSU4iLCJST0xFX0FETUlOIl0sImV4cCI6NDc3MDU1NDgzNCwiaWF0IjoxNjE0ODc3NjQxLCJqdGkiOiIwYTU2ZmU5My05YzU1LTRhZWYtYjRjZS1mMTg3YTcwMWYwYTYifQ.MEQQrmnNfoNTxVT1ZOiFT-UDGqzbv12u6jAlwPvKjSaaJYV84QKU3NTU79mp9hdHY3J7sKgfTGGJ1qMJtfSFpg'
+```
+
+> :exclamation: IMPORTANT: Never push a secret hardcoded and in plaintext in a Git repository. This application is just 
+> for showcasing the use of JSON Web Tokens in the Petclinic application but it should never be done this way for real applications.
+
+#### List of valid JSON Web Tokens:
+
+Role: `OWNER_ADMIN`
+```
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJYMDAwMDEiLCJncm91cHMiOlsiUk9MRV9PV05FUl9BRE1JTiJdLCJleHAiOjQ3NzA1NTUyMTEsImlhdCI6MTYxNDg3ODAxOCwianRpIjoiMzU0NzZkNWEtMjA1OC00YzliLTlhMDMtMzkxZmJkOTgyMWU3In0.qwMEcq7l3m4ppazuPpVKGhm4q1KOeNQeK_wC09iUjvs1wngFszU8fwhBVa4DuwHuVTxgo2WGGLZCr5XsRc3kgA
+```
+
+Role: `VET_ADMIN`
+```
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJYMDAwMDIiLCJncm91cHMiOlsiUk9MRV9WRVRfQURNSU4iXSwiZXhwIjo0NzcwNTU1MjExLCJpYXQiOjE2MTQ4NzgwMTgsImp0aSI6ImU5ODNhMzY0LTNhMjMtNDRlMi05YTE0LTE4ZTNmYWQ2ZGRiZCJ9.8EWFF19GhHtjvIxQENnYkgLeCHje5RY2Jn67JyeErQDLsK6lZxspzmF7Eb2v-D1b_abf7Hxx0fWhtjVLQMEPPA
+```
+
+Role: `ADMIN`
+```
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJYMDAwMDMiLCJncm91cHMiOlsiUk9MRV9BRE1JTiJdLCJleHAiOjQ3NzA1NTUyMTEsImlhdCI6MTYxNDg3ODAxOCwianRpIjoiOTU1YWVlOGEtYzFkYi00YmJkLTg0ZGMtYjQwMmZkOWI2OTc3In0.4iXV2RBTwT35CkzPwOz2w1q54ts0_ozsyOE980tMpWcTJVBQw7bJBl2Y7Z_Dc-heUbI4VvBlTLGEhyBZIN8B-g
+```
+
+Roles: `OWNER_ADMIN`, `VET_ADMIN`, `ADMIN`
+```
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJYMDAwMDQiLCJncm91cHMiOlsiUk9MRV9PV05FUl9BRE1JTiIsIlJPTEVfVkVUX0FETUlOIiwiUk9MRV9BRE1JTiJdLCJleHAiOjQ3NzA1NTUyMTEsImlhdCI6MTYxNDg3ODAxOCwianRpIjoiNGVmMjY0MjctYWUyNi00MGJjLWEzYjYtYzk3NGE0YTc0YWEzIn0.ypi1TQiGEuWqTKZwNe1pqMn7aIGXPCgMfONEoYmL2mrYW66vF5B3wFxVHyApcOOqttqNWtxNw7kPCdmqtW730Q
+```
