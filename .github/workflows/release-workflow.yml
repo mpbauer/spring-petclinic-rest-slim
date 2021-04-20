@@ -61,7 +61,8 @@ jobs:
           --set-env-vars "DB_HOST=${{ secrets.GCP_DB_HOST }}" \
           --set-env-vars "DB_PORT=${{ secrets.GCP_DB_PORT }}" \
           --set-env-vars "DB_DATABASE=${{ secrets.GCP_DB_DATABASE }}" \
-          --memory 512M
+          --memory 512M \
+          --cpu 1
 
       # Get the GKE credentials so we can deploy to the cluster
       - name: 'Get GKE Credentials'
